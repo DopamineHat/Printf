@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 07:43:45 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/03 08:17:16 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/03 08:22:12 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		ft_printf2(const char *format, va_list *arg, size_t len)
 	}
 	else if (get_next_arg > format)
 	{
-		
+		ft_putnstr(format, get_next_arg - format);
 }
 
 
