@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 07:43:45 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/03 12:22:23 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/04 14:46:37 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,34 @@
 #include "includes/ft_parse.h"
 #include <stdarg.h>
 
-int				ft_printf_do_stuff(char **format, va_list *arg, int flags)
+static int		ft_printf_do_stuff(char **format, va_list *arg,
+		unsigned short intel)
 {
-	if (ft_printf_flags(format, flags) == NULL)
+	int		width;
+	int		precision;
+	int		tmp;
+
+	width = 0;
+	if (ft_printf_flags(format, intel) == NULL)
 		return (-1);
-	
-	return (-1);
+	if (ft_printf_width(format, arg, width, intel) == NULL)
+		return (-1);
+	if (ft_printf_precision(format, arg, precision, intel) == NULL)
+		return (-1);
+	if (ft_printf_length(format, intel) == NULL)
+		return (-1);
+	if (**format == '\0')
+		return (0);
+	if (ft_get_process(**format, intel, width, precision) == NULL)
+		tmp = ft_process_is_NULL();
+	else
+		tmp = ft_process(**format, arg, intel, width, precision);
+	(*format)++;
+	return (tmp);
 }
 
 static int		ft_printf2(const char *format, va_list *arg, size_t len,
-		unsigned short flags)
+		unsigned short intel)
 {
 	char		*get_next_arg;
 	int			tmp;
@@ -40,17 +58,17 @@ static int		ft_printf2(const char *format, va_list *arg, size_t len,
 	{
 		ft_putnstr(format, get_next_arg - format);
 		return (ft_printf2(get_next_arg, arg, len + get_next_arg - format,
-					flags));
+					intel));
 	}
 	else
 	{
-		flags = 0;
-		return (tmp = ft_printf_do_stuff((char **)&format, arg, flags) == -1
-				? -1 : ft_printf2(format, arg, len + tmp, flags));
+		intel = 0;
+		return (tmp = ft_printf_do_stuff((char **)&format, arg, intel) == -1
+				? -1 : ft_printf2(format, arg, len + tmp, intel));
 	}
 }
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list arg;
 	int		val;

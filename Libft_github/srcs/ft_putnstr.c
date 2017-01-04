@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 08:40:44 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/03 12:08:22 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/04 14:20:08 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,3 @@ void	ft_putnstr(const char *s, size_t n)
 	while (n > 0)
 		ft_putchar(s[n--]);
 }
-
