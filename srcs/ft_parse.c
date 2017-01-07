@@ -6,11 +6,11 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 11:32:26 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/04 14:47:58 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/04 17:14:06 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_parse.h"
+#include "../includes/ft_printf.h"
 
 char		*ft_printf_flags(char **format, unsigned short intel)
 {
@@ -55,15 +55,18 @@ char		*ft_printf_width(char **format, va_list *arg, int width,
 			intel ^= 0x0020;
 			width = 0;
 			while (ft_isdigit(**format))
-				width *= 10 + (*(*format)++ - '0');
+				width = width * 10 + (*(*format)++ - '0');
 		}
 	}
 	return (*format);
 }
 
-char		*ft_printf_precision(char **format, va_list *arg, int precision,
+char		*ft_printf_precision(char **format, va_list *arg,
 		unsigned short intel)
 {
+	unsigned short precision;
+
+	precision = 0;
 	if (**format == '.')
 	{
 		(*format)++;
@@ -79,6 +82,7 @@ char		*ft_printf_precision(char **format, va_list *arg, int precision,
 			while (ft_isdigit(**format))
 				precision = precision * 10 + (*(*format)++ - '0');
 			intel ^= 0x0040;
+			intel ^= precision << 9;
 			return (*format);
 		}
 	}

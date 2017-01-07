@@ -6,18 +6,19 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 07:43:45 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/05 00:11:31 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/04 16:33:45 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft_github/includes/libft.h"
-#include "includes/ft_printf.h"
+#include "includes/ft_parse.h"
 #include <stdarg.h>
 
 static int		ft_printf_do_stuff(char **format, va_list *arg,
 		unsigned short intel)
 {
 	int		width;
+	int		precision;
 	int		tmp;
 
 	width = 0;
@@ -25,13 +26,13 @@ static int		ft_printf_do_stuff(char **format, va_list *arg,
 		return (-1);
 	if (ft_printf_width(format, arg, width, intel) == NULL)
 		return (-1);
-	if (ft_printf_precision(format, arg, intel) == NULL)
+	if (ft_printf_precision(format, arg, precision, intel) == NULL)
 		return (-1);
 	if (ft_printf_length(format, intel) == NULL)
 		return (-1);
 	if (**format == '\0')
 		return (0);
-	return (ft_process(*(*format)++, arg, intel, width));
+	return (ft_process(*(*format)++, arg, intel, width, precision));
 }
 
 static int		ft_printf2(const char *format, va_list *arg, size_t len,
