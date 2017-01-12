@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 22:37:54 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/07 22:37:59 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/01/12 01:42:24 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 ssize_t		ft_printf_escape(char format, va_list *arg, unsigned short intel,
 int width)
 {
-	if (intel &= 0x030)
-	{
-		
+	if (intel & 0x020 && intel | 0x004)
+		//
+	ft_putchar('%');
+	if (intel & 0x024)
+		//
+	return;
+}
+
 
 
