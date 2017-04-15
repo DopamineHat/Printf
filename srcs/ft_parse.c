@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 11:32:26 by rpagot            #+#    #+#             */
-/*   Updated: 2017/01/12 01:29:40 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/04/15 08:39:14 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char		*ft_printf_precision(char **format, va_list *arg,
 			while (ft_isdigit(**format))
 				precision = precision * 10 + (*(*format)++ - '0');
 			intel ^= 0x0040;
-			intel ^= precision << 9;
+			intel ^= (precision << 9);
 			return (*format);
 		}
 	}
